@@ -1,0 +1,9 @@
+[Gedit Plugin]
+Loader=python
+Module=whitespace-remover
+IAge=2
+Name=Whitespace Remover
+Description=Strips unnecessary whitespace upon saving
+Authors=Christian Luginbühl <dinkel@pimprecords.com>
+Copyright=Copyright (C) 2010 Christian Luginbühl
+Website=http://github.com/dinkel/gedit-whitespace-remover
