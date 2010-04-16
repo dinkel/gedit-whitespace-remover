@@ -17,6 +17,93 @@
 # This software is heavily inspried and in parts based on Osmo Salomaa's
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
-# I simply couldn't deny myself...
-pot:
-	pygettext whitespace_remover/*
+# Version of the program (to be updated when creating new packages)
+VERSION=0.1.0
+
+# Name of the program
+APPLICATION=gedit-whitespace-remover
+
+# Original author
+AUTHOR="Christian Luginbühl"
+AUTHOR_EMAIL="dinkel@pimprecords.com"
+
+# Name of the translations files (without extension)
+DOMAIN=messages
+
+# Dummy target, that intercepts the call to 'make' (without explicit target)
+dummy:
+	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, clean, mrproper\n"
+
+# Creates the .zip and .tar.gz packages
+dist: tgz zip
+
+# Packs everything needed to be deployed as a plugin into a gzipped tar
+tgz: _create-distdir _generate-mo
+	tar czf dist/$(APPLICATION)_$(VERSION).tar.gz \
+	        whitespace-remover.gedit-plugin \
+	        whitespace-remover/ \
+	        --exclude *.po
+
+# Packs everything needed to be deployed as a plugin into a zip
+zip: _create-distdir _generate-mo
+	zip -qr dist/$(APPLICATION)_$(VERSION).zip \
+	        whitespace-remover.gedit-plugin \
+	        whitespace-remover/ \
+	        -x *.po
+
+# Merges all locales with a new generated .pot-template
+update-locales: _generate-pot
+	find whitespace-remover/locale/ \
+	     -name $(DOMAIN).po \
+	     -exec msgmerge --update \
+	                    --backup=none \
+	                    {} $(DOMAIN).pot \;
+
+# Creates a new locale provided in the LOCALE-variable with a new .po-file
+create-locale: _generate-pot _create_localedir
+	if [ -n "$(LOCALE)" ] ; then \
+		if [ ! -e "whitespace-remover/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po" ] ; then \
+			msginit --locale=$(LOCALE) \
+				    --input=$(DOMAIN).pot \
+				    --output="whitespace-remover/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po" ; \
+		    sed -i 's/PACKAGE/$(APPLICATION)/g' whitespace-remover/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po ; \
+		fi \
+	else \
+		echo "Usage is: make create-locale LOCALE={ll[_CC]}\n" ; \
+	fi
+
+# Cleans up the directory sturcture
+clean:
+	rm -rf dist/
+	rm -f $(DOMAIN).pot
+
+# Cleans more thorooughly (including .mo-files and .pyc that are needed for easy development)
+mrproper: clean
+	find . -name "*.pyc" -exec rm {} \;
+	find whitespace-remover/locale -name "*.mo" -exec rm {} \;
+
+# Creates a dist/ directory where packages are saved (private)
+_create-distdir:
+	mkdir -p dist
+
+# Creates a directory structure for a new locale if set (private)
+_create_localedir:
+	if [ -n "$(LOCALE)" ] ; then \
+		mkdir -p whitespace-remover/locale/$(LOCALE)/LC_MESSAGES ; \
+	fi
+
+# Generates a l10n .po-template by searching through source files (private)
+_generate-pot:
+	xgettext --language=Python \
+	         --copyright-holder=$(AUTHOR) \
+	         --package-name=$(APPLICATION) \
+	         --package-version=$(VERSION) \
+	         --msgid-bugs-address=$(AUTHOR_EMAIL) \
+	         --output=$(DOMAIN).pot \
+	         whitespace-remover/*.py
+
+# Generates the binary l10n .mo-files for all known languages (private)
+_generate-mo:
+	find whitespace-remover/locale/*/LC_MESSAGES \
+	     -type d \
+	     -exec msgfmt {}/$(DOMAIN).po -o {}/$(DOMAIN).mo \;

@@ -35,7 +35,7 @@ class ConfigDialog(gtk.Dialog):
 
         locale_path = os.path.join(os.path.dirname(__file__), "locale")
 
-        trans = gettext.translation("messages", locale_path, ["de"])
+        trans = gettext.translation("messages", locale_path, ['en', 'de'])
         trans.install()
 
         gtk.Dialog.__init__(self,

@@ -1,40 +1,33 @@
-# gEdit Whitespace Remover Plugin - german translation
+# German translations for gedit-whitespace-remover package.
 # Copyright (C) 2010 Christian Luginbühl
+# This file is distributed under the same license as the gedit-whitespace-remover package.
+# Christian Luginbuehl <dinkel@pimprecords.com>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit-whitespace-remover 0.1\n"
-"POT-Creation-Date: 2010-04-10 23:28+CEST\n"
-"PO-Revision-Date: 2010-04-11 01:00+CEST\n"
-"Last-Translator: Christian Luginbühl <dinkel@pimprecords.com>\n"
-"Language-Team: Christian Luginbühl <dinkel@pimprecords.com>\n"
+"Project-Id-Version: gedit-whitespace-remover 0.1.0\n"
+"Report-Msgid-Bugs-To: dinkel@pimprecords.com\n"
+"POT-Creation-Date: 2010-04-16 23:52+0200\n"
+"PO-Revision-Date: 2010-04-16 23:52+0200\n"
+"Last-Translator: Christian Luginbuehl <dinkel@pimprecords.com>\n"
+"Language-Team: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: pygettext.py 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: whitespace-remover/config_dialog.py:42
+msgid "Settings"
+msgstr "Einstellungen"
 
-#: config_dialog.py:39
-msgid "Whitespace Remover Settings"
-msgstr "Whitespace Remover Einstellungen"
+#: whitespace-remover/config_dialog.py:57
+msgid "Actions to perform upon saving:"
+msgstr "Folgendes beim Speichern ausführen:"
 
-#: config_dialog.py:53
-msgid "Configuration settings"
-msgstr "Konfigurationseinstellungen"
+#: whitespace-remover/config_dialog.py:63
+msgid "_Strip trailing whitespace on every line"
+msgstr "_Entferne die Leerzeichen am Ende jeder Zeile"
 
-#: config_dialog.py:55
-msgid "_Remove appending newlines"
-msgstr "_Entferne abschliessende Zeilenumbrüche"
-
-#: config_dialog.py:60
-msgid "_Enforce final newline"
-msgstr "E_rzwinge Zeilenumbruch in letzter Zeile"
-
-#: config_dialog.py:74
-msgid "Checkbox activated"
-msgstr "Häckchen gesetzt"
-
-#: config_dialog.py:76
-msgid "Checkbox deactivated"
-msgstr "Häckchen entfernt"
-
+#: whitespace-remover/config_dialog.py:71
+msgid "_Remove newlines at the end of document"
+msgstr "E_ntferne Leerzeilen am Ende des Dokuments"

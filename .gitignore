@@ -1,2 +1,11 @@
 # ignore all compiled python files (*.pyc)
 *.pyc
+
+# ignore the dist directory with containing packages
+dist/
+
+# ignore the translation template .pot-file
+*.pot
+
+# ignore all compiled translation .mo-files
+*.mo
