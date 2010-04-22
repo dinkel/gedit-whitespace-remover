@@ -32,7 +32,7 @@ DOMAIN=messages
 
 # Dummy target, that intercepts the call to 'make' (without explicit target)
 dummy:
-	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, clean, mrproper\n"
+	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, test, unittest, disttest, clean, mrproper\n"
 
 # Creates the .zip and .tar.gz packages
 dist: tgz zip

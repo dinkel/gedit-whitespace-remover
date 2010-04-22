@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Whitespace Remover - Gedit plugin
@@ -21,15 +20,25 @@
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
 import unittest
+import sys
+import os
+import gtk
 
-def suite():
-    modules_to_test = ('config_settings_test',
-                       'document_manipulator_test',
-                       'localization_test')
-    alltests = unittest.TestSuite()
-    for module in map(__import__, modules_to_test):
-        alltests.addTest(unittest.findTestCases(module))
-    return alltests
+sys.path.append(os.path.join(os.path.dirname(__file__),
+                             '..',
+                             '..',
+                             'whitespace-remover'))
+
+from localization import Localization
+
+class LocalizationTest(unittest.TestCase):
+
+    def test_not_dying_when_calling(self):
+        try:
+            Localization.setup()
+        except:
+            self.fail('Localization.setup did raise an error')
+
 
 if __name__ == '__main__':
-    unittest.main(defaultTest='suite')
+    unittest.main()
