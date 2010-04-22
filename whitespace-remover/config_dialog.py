@@ -20,23 +20,17 @@
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
 import gtk
-import gettext
-import os
 
-from config_settings import ConfigSettings
+from localization import Localization
 
 class ConfigDialog(gtk.Dialog):
     """Configuration dialog."""
 
     def __init__(self, plugin, config = None):
         """Constructor."""
-
         self._config = config
 
-        locale_path = os.path.join(os.path.dirname(__file__), "locale")
-
-        trans = gettext.translation("messages", locale_path, ['en', 'de'])
-        trans.install()
+        Localization.setup()
 
         gtk.Dialog.__init__(self,
                             _("Settings"),

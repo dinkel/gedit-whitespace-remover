@@ -38,26 +38,18 @@ dummy:
 dist: tgz zip
 
 # Packs everything needed to be deployed as a plugin into a gzipped tar
-tgz: _create-distdir _generate-mo
+tgz: _create-distdir compile-locales
 	tar czf dist/$(APPLICATION)_$(VERSION).tar.gz \
 	        whitespace-remover.gedit-plugin \
 	        whitespace-remover/ \
 	        --exclude *.po
 
 # Packs everything needed to be deployed as a plugin into a zip
-zip: _create-distdir _generate-mo
+zip: _create-distdir compile-locales
 	zip -qr dist/$(APPLICATION)_$(VERSION).zip \
 	        whitespace-remover.gedit-plugin \
 	        whitespace-remover/ \
 	        -x *.po
-
-# Merges all locales with a new generated .pot-template
-update-locales: _generate-pot
-	find whitespace-remover/locale/ \
-	     -name $(DOMAIN).po \
-	     -exec msgmerge --update \
-	                    --backup=none \
-	                    {} $(DOMAIN).pot \;
 
 # Creates a new locale provided in the LOCALE-variable with a new .po-file
 create-locale: _generate-pot _create_localedir
@@ -67,17 +59,42 @@ create-locale: _generate-pot _create_localedir
 				    --input=$(DOMAIN).pot \
 				    --output="whitespace-remover/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po" ; \
 		    sed -i 's/PACKAGE/$(APPLICATION)/g' whitespace-remover/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po ; \
+			echo "Make sure to also update 'whitespace-remover.gedit-plugin'" ; \
 		fi \
 	else \
 		echo "Usage is: make create-locale LOCALE={ll[_CC]}\n" ; \
 	fi
+
+# Merges all locales with a new generated .pot-template
+update-locales: _generate-pot
+	find whitespace-remover/locale/ \
+	     -name $(DOMAIN).po \
+	     -exec msgmerge --update \
+	                    --backup=none \
+	                    {} $(DOMAIN).pot \;
+
+# Generates the binary l10n .mo-files for all known languages
+compile-locales:
+	find whitespace-remover/locale/*/LC_MESSAGES \
+	     -type d \
+	     -exec msgfmt {}/$(DOMAIN).po -o {}/$(DOMAIN).mo \;
+
+# Runs all tests
+test: unittest disttest
+
+# Runs the unittests
+unittest:
+	python ./test/unit/alltests.py
+
+disttest:
+	python ./test/dist/locale_in_pluginfile_test.py
 
 # Cleans up the directory sturcture
 clean:
 	rm -rf dist/
 	rm -f $(DOMAIN).pot
 
-# Cleans more thorooughly (including .mo-files and .pyc that are needed for easy development)
+# Cleans more thoroughly (including .mo-files and .pyc that are not needed for git updates)
 mrproper: clean
 	find . -name "*.pyc" -exec rm {} \;
 	find whitespace-remover/locale -name "*.mo" -exec rm {} \;
@@ -101,9 +118,3 @@ _generate-pot:
 	         --msgid-bugs-address=$(AUTHOR_EMAIL) \
 	         --output=$(DOMAIN).pot \
 	         whitespace-remover/*.py
-
-# Generates the binary l10n .mo-files for all known languages (private)
-_generate-mo:
-	find whitespace-remover/locale/*/LC_MESSAGES \
-	     -type d \
-	     -exec msgfmt {}/$(DOMAIN).po -o {}/$(DOMAIN).mo \;

@@ -19,13 +19,12 @@
 # This software is heavily inspried and in parts based on Osmo Salomaa's
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
-import gtk
-
 class DocumentManipulator(object):
     """Provides class methods that manipluate a GtkTextBuffer object."""
 
-    def strip_trailing_blank_lines_impl(doc):
-        """Delete trailing space at the end of the document."""
+    @classmethod
+    def strip_trailing_blank_lines(_cls_, doc):
+        """Delete trailing newlines at the end of the document."""
 
         buffer_end = doc.get_end_iter()
         if buffer_end.starts_line():
@@ -36,9 +35,8 @@ class DocumentManipulator(object):
                     break
             doc.delete(itr, buffer_end)
 
-    strip_trailing_blank_lines = staticmethod(strip_trailing_blank_lines_impl)
-
-    def strip_trailing_spaces_on_lines_impl(doc):
+    @classmethod
+    def strip_trailing_spaces_on_lines(_cls_, doc):
         """Delete trailing space at the end of each line."""
 
         buffer_end = doc.get_end_iter()
@@ -51,5 +49,3 @@ class DocumentManipulator(object):
                     itr.forward_char()
                     break
             doc.delete(itr, line_end)
-
-    strip_trailing_spaces_on_lines = staticmethod(strip_trailing_spaces_on_lines_impl)

@@ -20,7 +20,6 @@
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
 import gedit
-import gtk
 
 from config_dialog import ConfigDialog
 from config_settings import ConfigSettings
