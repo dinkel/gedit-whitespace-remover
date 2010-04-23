@@ -84,6 +84,10 @@ class WhitespaceRemoverPlugin(gedit.Plugin):
         """Strip trailing spaces in document."""
 
         doc.begin_user_action()
-        DocumentManipulator.strip_trailing_spaces_on_lines(doc)
-        DocumentManipulator.strip_trailing_blank_lines(doc)
+        if (self._config.get_bool('remove_whitespace')):
+            DocumentManipulator.strip_trailing_spaces_on_lines(doc)
+
+        if (self._config.get_bool('remove_newlines')):
+            DocumentManipulator.strip_trailing_blank_lines(doc)
+
         doc.end_user_action()
