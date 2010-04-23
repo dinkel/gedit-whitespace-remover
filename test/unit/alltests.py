@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Whitespace Remover - Gedit plugin
+# Whitespace Remover - gedit plugin
 # Copyright (C) 2010 Christian Luginbühl
 #
 # This program is free software: you can redistribute it and/or modify

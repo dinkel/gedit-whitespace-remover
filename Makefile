@@ -1,4 +1,4 @@
-# Whitespace Remover - Gedit plugin
+# Whitespace Remover - gedit plugin
 # Copyright (C) 2010 Christian Luginbühl
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,6 +33,9 @@ DOMAIN=messages
 # Dummy target, that intercepts the call to 'make' (without explicit target)
 dummy:
 	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, test, unittest, disttest, clean, mrproper\n"
+
+# Tests and on success creates the packages
+safe-dist: test dist
 
 # Creates the .zip and .tar.gz packages
 dist: tgz zip

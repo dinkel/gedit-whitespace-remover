@@ -1,4 +1,4 @@
-Whitespace Remover - Gedit plugin
+Whitespace Remover - gedit plugin
 =================================
 
 This plugin for gedit - GNOME text editor - aims to provide a few (acutally
@@ -63,5 +63,5 @@ Comments / Bugs
 Although I do consider myself as a skilled programmer, these are my first steps
 in Python and gedit plugin programming. Therefore I'm eager to hear your
 comments about this piece of software. Also if you find a bug or thought of an
-enhancment, please use GitHubs bugtracking system. This plugins home is stated
+enhancment, please use GitHubs bugtracking system. This plugin's home is stated
 above.
