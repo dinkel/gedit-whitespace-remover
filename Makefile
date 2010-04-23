@@ -42,14 +42,14 @@ dist: tgz zip
 
 # Packs everything needed to be deployed as a plugin into a gzipped tar
 tgz: _create-distdir compile-locales
-	tar czf dist/$(APPLICATION)_$(VERSION).tar.gz \
+	tar czf dist/$(APPLICATION)-$(VERSION).tar.gz \
 	        whitespace-remover.gedit-plugin \
 	        whitespace-remover/ \
 	        --exclude *.po
 
 # Packs everything needed to be deployed as a plugin into a zip
 zip: _create-distdir compile-locales
-	zip -qr dist/$(APPLICATION)_$(VERSION).zip \
+	zip -qr dist/$(APPLICATION)-$(VERSION).zip \
 	        whitespace-remover.gedit-plugin \
 	        whitespace-remover/ \
 	        -x *.po
