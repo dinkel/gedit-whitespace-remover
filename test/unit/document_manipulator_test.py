@@ -101,8 +101,8 @@ class DocumentManipulatorTest(unittest.TestCase):
 
         self.assertEqualContents(resulting, raw_win)
 
-    def text_different_line_endings(self):
-        raw_random = self._get_textbuffer('different_utf8_raw.txt')
+    def test_different_line_endings(self):
+        raw_different = self._get_textbuffer('different_utf8_raw.txt')
 
         resulting = self._get_textbuffer(
             'different_utf8_stripped_newlines.txt')

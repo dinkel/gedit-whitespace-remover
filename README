@@ -27,7 +27,7 @@ Simply extract the package into the ~/.gnome2/gedit/plugins directory, or - for
 a system-wide delpoyment - into /usr/lib/gedit-2/plugins (the path may be
 different, depending on your distribution).
 
-Then active and configure the plugin through Edit -> Preferences -> Plugins.
+Then activate and configure the plugin through Edit -> Preferences -> Plugins.
 
 Development
 -----------
@@ -56,6 +56,11 @@ the necessary files and directories, like so:
 $ ln -s ~/${YOUR_REPO_ROOT}/whitespace-remover.gedit-plugin \
         ~/${YOUR_REPO_ROOT}/whitespace-remover/ \
         ~/.gnome2/gedit/plugins/
+
+Sometimes (especially for testing) you may want to remove the gconf entries for
+this plugin. This can be done this way:
+
+$ gconftool-2 --recursive-unset /apps/gedit-2/plugins/whitespace-remover
 
 Comments / Bugs
 ---------------
