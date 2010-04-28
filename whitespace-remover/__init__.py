@@ -59,11 +59,11 @@ class WhitespaceRemoverPlugin(gedit.Plugin):
             doc.set_data(name, None)
 
     def ui_update(self, window):
-        """Update ths user-interface."""
+        """Update the user-interface."""
         pass
 
     def is_configurable(self):
-        """Returns that this plugin is conifgurable."""
+        """Returns that this plugin is configurable."""
         return True
 
     def create_configure_dialog(self):

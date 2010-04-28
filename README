@@ -1,7 +1,7 @@
 Whitespace Remover - gedit plugin
 =================================
 
-This plugin for gedit - GNOME text editor - aims to provide a few (acutally
+This plugin for gedit - GNOME text editor - aims to provide a few (actually
 only two) additional convenience methods. Upon saving it will remove whitespace
 from the end of all lines and remove trailing newlines from the end of the
 document.
@@ -19,6 +19,11 @@ Contact
 
 Author: Christian Luginbühl <dinkel@pimprecords.com>
 Home:   <http://github.com/dinkel/gedit-whitespace-remover>
+
+License
+-------
+
+See the LICENSE file.
 
 Install
 -------
