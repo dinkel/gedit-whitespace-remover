@@ -56,11 +56,10 @@ for adding/updating new languages:
 
 It proved helpful for development to check out the git-repository to your
 favourite location and create symlinks in your personal plugins directory to
-the necessary files and directories, like so:
+the necessary files and directories. There is a make target, that accomplishes
+this:
 
-$ ln -s ~/${YOUR_REPO_ROOT}/whitespace-remover.gedit-plugin \
-        ~/${YOUR_REPO_ROOT}/whitespace-remover/ \
-        ~/.gnome2/gedit/plugins/
+$ make install-dev
 
 Sometimes (especially for testing) you may want to remove the gconf entries for
 this plugin. This can be done this way:

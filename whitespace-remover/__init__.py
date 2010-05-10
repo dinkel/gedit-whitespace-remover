@@ -23,43 +23,28 @@ import gedit
 
 from config_dialog import ConfigDialog
 from config_settings import ConfigSettings
-from document_manipulator import DocumentManipulator
+from window_helper import WindowHelper
 
 class WhitespaceRemoverPlugin(gedit.Plugin):
-    """Automatically strip all trailing whitespace upon saving."""
+    """Plugin that removes unnecessary whitespace."""
 
     def __init__(self):
         """Constructor."""
+        gedit.Plugin.__init__(self)
+        self._instances = {}
         self._config = ConfigSettings()
 
     def activate(self, window):
-        """Activate plugin."""
-
-        handler_id = window.connect("tab-added", self.on_window_tab_added)
-        window.set_data(self.__class__.__name__, handler_id)
-        for doc in window.get_documents():
-            self.connect_document(doc)
-
-    def connect_document(self, doc):
-        """Connect to document's 'saving' signal."""
-
-        handler_id = doc.connect("saving", self.on_document_saving)
-        doc.set_data(self.__class__.__name__, handler_id)
+        """Activate the plugin for a window."""
+        self._instances[window] = WindowHelper(window, self._config)
 
     def deactivate(self, window):
-        """Deactivate plugin."""
+        """Deactivate the plugin for a window."""
+        self._instances[window].deactivate()
+        del self._instances[window]
 
-        name = self.__class__.__name__
-        handler_id = window.get_data(name)
-        window.disconnect(handler_id)
-        window.set_data(name, None)
-        for doc in window.get_documents():
-            handler_id = doc.get_data(name)
-            doc.disconnect(handler_id)
-            doc.set_data(name, None)
-
-    def ui_update(self, window):
-        """Update the user-interface."""
+    def update_ui(self, window):
+        """Simply returns - no user interface update is to be handled."""
         pass
 
     def is_configurable(self):
@@ -68,26 +53,4 @@ class WhitespaceRemoverPlugin(gedit.Plugin):
 
     def create_configure_dialog(self):
         """Show the plugin settings window."""
-        dialog = ConfigDialog(self, self._config)
-        return dialog
-
-    def on_window_tab_added(self, window, tab):
-        """Connect the document in tab."""
-
-        name = self.__class__.__name__
-        doc = tab.get_document()
-        handler_id = doc.get_data(name)
-        if handler_id is None:
-            self.connect_document(doc)
-
-    def on_document_saving(self, doc, *args):
-        """Strip trailing spaces in document."""
-
-        doc.begin_user_action()
-        if (self._config.get_bool('remove_whitespace')):
-            DocumentManipulator.strip_trailing_spaces_on_lines(doc)
-
-        if (self._config.get_bool('remove_newlines')):
-            DocumentManipulator.strip_trailing_blank_lines(doc)
-
-        doc.end_user_action()
+        return ConfigDialog(self, self._config)
