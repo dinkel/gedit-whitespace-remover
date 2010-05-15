@@ -50,7 +50,11 @@ tgz: _create-distdir compile-locales
 	        $(SHORT_NAME).gedit-plugin \
 	        $(SHORT_NAME)/ \
 	        --exclude *.po \
-	        --exclude *.pyc \
+	        --exclude *.pyc
+	cd dist && \
+	md5sum $(APPLICATION)-$(VERSION).tar.gz \
+	       > $(APPLICATION)-$(VERSION).tar.gz.md5 && \
+	gpg --detach-sign $(APPLICATION)-$(VERSION).tar.gz
 
 # Packs everything needed to be deployed as a plugin into a zip
 zip: _create-distdir compile-locales
@@ -59,6 +63,10 @@ zip: _create-distdir compile-locales
 	        $(SHORT_NAME).gedit-plugin \
 	        $(SHORT_NAME)/ \
 	        -x *.po *.pyc
+	cd dist && \
+	md5sum $(APPLICATION)-$(VERSION).zip \
+	       > $(APPLICATION)-$(VERSION).zip.md5 && \
+	gpg --detach-sign $(APPLICATION)-$(VERSION).zip
 
 # Creates a new locale provided in the LOCALE-variable with a new .po-file
 create-locale: _generate-pot _create_localedir
