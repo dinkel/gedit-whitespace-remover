@@ -128,6 +128,21 @@ class DocumentManipulatorTest(unittest.TestCase):
 
         self.assertEqualContents(resulting, raw_different)
 
+    def test_preserve_cursor(self):
+        resulting = self._get_textbuffer(
+            'unix_utf8_stripped_whitespace_then_newlines_cursor_near_end.txt')
+
+        near_end = self.raw_unix.get_iter_at_line_offset(9, 1)
+
+        self.raw_unix.place_cursor(near_end)
+
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           True)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       True)
+
+        self.assertEqualContents(resulting, self.raw_unix)
+
 
     def assertEqualContents(self, expected, actual):
         self.assertEqual(self._get_contents(expected),
