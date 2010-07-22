@@ -40,12 +40,16 @@ class DocumentHelper:
 
     def _on_saving(self, doc, *args):
         """Strip trailing spaces in document."""
-
         doc.begin_user_action()
+
+        preserve_cursor = self._config.get_bool('preserve_cursor')
+
         if (self._config.get_bool('remove_whitespace')):
-            DocumentManipulator.strip_trailing_spaces_on_lines(doc)
+            DocumentManipulator.strip_trailing_spaces_on_lines(doc,
+                                                               preserve_cursor)
 
         if (self._config.get_bool('remove_newlines')):
-            DocumentManipulator.strip_trailing_blank_lines(doc)
+            DocumentManipulator.strip_trailing_blank_lines(doc,
+                                                           preserve_cursor)
 
         doc.end_user_action()

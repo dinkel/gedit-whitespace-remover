@@ -18,7 +18,7 @@
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
 # Version of the program (to be updated when creating new packages)
-VERSION=0.2.0
+VERSION=0.3.0
 
 # Name of the program
 APPLICATION=gedit-whitespace-remover

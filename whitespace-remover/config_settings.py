@@ -28,6 +28,7 @@ class ConfigSettings():
 
     _default_remove_whitespace = True
     _default_remove_newlines = True
+    _default_preserve_cursor = True
 
     def __init__(self):
         """Constructor."""
@@ -35,10 +36,13 @@ class ConfigSettings():
             self._set_bool_forced('remove_whitespace',
                                   self.__class__._default_remove_whitespace)
 
-
         if not self._has_key('remove_newlines'):
             self._set_bool_forced('remove_newlines',
                                   self.__class__._default_remove_newlines)
+
+        if not self._has_key('preserve_cursor'):
+            self._set_bool_forced('preserve_cursor',
+                                  self.__class__._default_preserve_cursor)
 
     def _has_key(self, key):
         """Test if a key exists."""

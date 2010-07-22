@@ -39,32 +39,40 @@ class DocumentManipulatorTest(unittest.TestCase):
     def test_unix_utf8_strip_whitespace(self):
         resulting = self._get_textbuffer('unix_utf8_stripped_whitespace.txt')
 
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
 
         self.assertEqualContents(resulting, self.raw_unix)
 
     def test_unix_utf8_strip_whitespace_multiple(self):
         resulting = self._get_textbuffer('unix_utf8_stripped_whitespace.txt')
 
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
 
         self.assertEqualContents(resulting, self.raw_unix)
 
     def test_unix_utf8_strip_newlines(self):
         resulting = self._get_textbuffer('unix_utf8_stripped_newlines.txt')
 
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
 
         self.assertEqualContents(resulting, self.raw_unix)
 
     def test_unix_utf8_strip_newlines_multiple(self):
         resulting = self._get_textbuffer('unix_utf8_stripped_newlines.txt')
 
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
 
         self.assertEqualContents(resulting, self.raw_unix)
 
@@ -72,8 +80,10 @@ class DocumentManipulatorTest(unittest.TestCase):
         resulting = self._get_textbuffer(
             'unix_utf8_stripped_whitespace_then_newlines.txt')
 
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
 
         self.assertEqualContents(resulting, self.raw_unix)
 
@@ -81,11 +91,15 @@ class DocumentManipulatorTest(unittest.TestCase):
         """NOTE: This is neither good nor bad, the test just shows it."""
         other_way = self._get_textbuffer('unix_utf8_raw.txt')
 
-        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix)
-        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix)
+        DocumentManipulator.strip_trailing_spaces_on_lines(self.raw_unix,
+                                                           False)
+        DocumentManipulator.strip_trailing_blank_lines(self.raw_unix,
+                                                       False)
 
-        DocumentManipulator.strip_trailing_blank_lines(other_way)
-        DocumentManipulator.strip_trailing_spaces_on_lines(other_way)
+        DocumentManipulator.strip_trailing_blank_lines(other_way,
+                                                       False)
+        DocumentManipulator.strip_trailing_spaces_on_lines(other_way,
+                                                           False)
 
         self.assertNotEqual(self._get_contents(self.raw_unix),
                             self._get_contents(other_way))
@@ -96,8 +110,10 @@ class DocumentManipulatorTest(unittest.TestCase):
         resulting = self._get_textbuffer(
             'win_utf8_stripped_whitespace_then_newlines.txt')
 
-        DocumentManipulator.strip_trailing_spaces_on_lines(raw_win)
-        DocumentManipulator.strip_trailing_blank_lines(raw_win)
+        DocumentManipulator.strip_trailing_spaces_on_lines(raw_win,
+                                                           False)
+        DocumentManipulator.strip_trailing_blank_lines(raw_win,
+                                                       False)
 
         self.assertEqualContents(resulting, raw_win)
 
@@ -107,7 +123,8 @@ class DocumentManipulatorTest(unittest.TestCase):
         resulting = self._get_textbuffer(
             'different_utf8_stripped_newlines.txt')
 
-        DocumentManipulator.strip_trailing_blank_lines(raw_different)
+        DocumentManipulator.strip_trailing_blank_lines(raw_different,
+                                                       False)
 
         self.assertEqualContents(resulting, raw_different)
 

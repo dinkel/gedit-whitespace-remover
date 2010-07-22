@@ -69,8 +69,17 @@ class ConfigDialog(gtk.Dialog):
                                   'remove_newlines')
         newlines_checkbox.set_active(self._config.get_bool('remove_newlines'))
 
+        checkbox_label = _("_Always preserve the cursor position")
+        preserve_cursor_checkbox = gtk.CheckButton(checkbox_label)
+        preserve_cursor_checkbox.connect('clicked',
+                                         self.update_setting,
+                                         'preserve_cursor')
+        preserve_cursor_checkbox.set_active(
+            self._config.get_bool('preserve_cursor'))
+
         config_box.pack_start(whitespace_checkbox, True, True, 0)
         config_box.pack_start(newlines_checkbox, True, True, 0)
+        config_box.pack_start(preserve_cursor_checkbox, True, True, 0)
 
         main_box.pack_start(title_label, True, True, 0)
         main_box.pack_start(config_box, True, True, 0)

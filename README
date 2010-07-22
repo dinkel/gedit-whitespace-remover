@@ -9,8 +9,8 @@ document.
 This plugin was heavily inspired and is in parts based on Osmo Salomaa's
 trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>. Out of a supposed
 missing feature (that proved to be inside of gedit already - thanks for
-pointing this out, Osmo) and of having a nice sandbox to learn Python, this
-plugin was brought to life. It only extends its predecessor by the ability to
+pointing this out Osmo) and of having a nice sandbox to learn Python, this
+plugin was brought to life. It extends its predecessor by the ability to
 configure its actions on the UI, i18n support and unittests (you might want to
 call this bloat ;-)).
 
@@ -29,7 +29,7 @@ Install
 -------
 
 Simply extract the package into the ~/.gnome2/gedit/plugins directory, or - for
-a system-wide delpoyment - into /usr/lib/gedit-2/plugins (the path may be
+a system-wide deployment - into /usr/lib/gedit-2/plugins (the path may be
 different, depending on your distribution).
 
 Then activate and configure the plugin through Edit -> Preferences -> Plugins.
@@ -37,10 +37,10 @@ Then activate and configure the plugin through Edit -> Preferences -> Plugins.
 Development
 -----------
 
-The Makefile provided has quite a few nice methods for pakcage generation,
+The Makefile provided has quite a few nice methods for package generation,
 testing and especially for adding new languages. Even though everybody can read
-this file for finding about the possible targets, here are a few short notices
-for adding/updating new languages:
+the Makefile for finding about the possible targets, here are a few short
+notices for adding/updating new languages:
 
 - Creating a new locale:
 
