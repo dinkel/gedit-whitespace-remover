@@ -9,12 +9,13 @@ Contact
 -------
 
 Author: Christian Luginbühl <dinkel@pimprecords.com>
+
 Home:   <http://github.com/dinkel/gedit-whitespace-remover/>
 
 License
 -------
 
-See the LICENSE file.
+See the `LICENSE` file.
 
 Install
 -------
@@ -27,13 +28,13 @@ If you are having root access:
 
 Copy or move the file `org.gnome.gedit.plugin.whitespace-remover.gschema.xml` into `/usr/share/glib-2.0/schemas/` and run
 
-    # sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+    $ sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-If you do not have root access:
+If you do *not* have root access:
 
 Copy or move the file `org.gnome.gedit.plugin.whitespace-remover.gschema.xml` into `~/.local/share/glib-2.0/schemas/` (you might need to create this  directory first). Run:
 
-    # glib-compile-schemas ~/.local/share/glib-2.0/schemas/
+    $ glib-compile-schemas ~/.local/share/glib-2.0/schemas/
 
 Additionally you need to make sure that `~/.local/share` is in the environment variable `XDG_DATA_DIRS` (this is due to an im my opinion wrong behaviour of GSettings and described in [https://bugzilla.gnome.org/show_bug.cgi?id=741335]).
 
