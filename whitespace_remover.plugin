@@ -10,5 +10,5 @@ Description[de]=Entfernt unnötige Leerzeichen während des Speicherns
 Description[ru]=Удаляет лишние пробелы при сохранении документа
 Icon=edit-clear
 Authors=Christian Luginbühl <dinkel@pimprecords.com>
-Copyright=Copyright © 2014 Christian Luginbühl
-Website=http://github.com/dinkel/gedit-whitespace-remover
+Copyright=Copyright © 2010-2014 Christian Luginbühl
+Website=https://github.com/dinkel/gedit-whitespace-remover

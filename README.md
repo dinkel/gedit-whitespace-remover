@@ -10,7 +10,7 @@ Contact
 
 Author: Christian Luginbühl <dinkel@pimprecords.com>
 
-Home:   <http://github.com/dinkel/gedit-whitespace-remover/>
+Home: <http://github.com/dinkel/gedit-whitespace-remover/>
 
 License
 -------
