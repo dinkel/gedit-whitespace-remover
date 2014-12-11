@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: whitespace-remover/config_dialog.py:36
+#: whitespace_remover/config_dialog.py:36
 msgid "Settings"
 msgstr "Настройки"
 
-#: whitespace-remover/config_dialog.py:51
+#: whitespace_remover/config_dialog.py:51
 msgid "Actions to perform upon saving:"
 msgstr "Действия при сохранении:"
 
-#: whitespace-remover/config_dialog.py:57
+#: whitespace_remover/config_dialog.py:57
 msgid "_Strip trailing whitespace on every line"
 msgstr "_Удалять пробелы в конце строк"
 
-#: whitespace-remover/config_dialog.py:65
+#: whitespace_remover/config_dialog.py:66
 msgid "_Remove newlines at the end of document"
-msgstr "_Удялять пустые строки в конце документа"
+msgstr "Удялять _пустые строки в конце документа"
 
-#: whitespace-remover/config_dialog.py:72
+#: whitespace_remover/config_dialog.py:74
 msgid "_Always preserve the cursor position"
 msgstr "_Не изменять активную строку"
