@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit-whitespace-remover 0.1.0\n"
 "Report-Msgid-Bugs-To: dinkel@pimprecords.com\n"
-"POT-Creation-Date: 2014-12-10 01:20+0100\n"
+"POT-Creation-Date: 2014-12-11 17:31+0100\n"
 "PO-Revision-Date: 2010-04-16 23:52+0200\n"
 "Last-Translator: Christian Luginbuehl <dinkel@pimprecords.com>\n"
 "Language-Team: German\n"
@@ -29,10 +29,10 @@ msgstr "Folgendes beim Speichern ausführen:"
 msgid "_Strip trailing whitespace on every line"
 msgstr "_Entferne die Leerzeichen am Ende jeder Zeile"
 
-#: whitespace_remover/config_dialog.py:65
+#: whitespace_remover/config_dialog.py:66
 msgid "_Remove newlines at the end of document"
 msgstr "En_tferne Leerzeilen am Ende des Dokuments"
 
-#: whitespace_remover/config_dialog.py:72
+#: whitespace_remover/config_dialog.py:74
 msgid "_Always preserve the cursor position"
 msgstr "_Niemals Cursorposition verändern"
