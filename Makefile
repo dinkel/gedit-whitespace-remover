@@ -1,5 +1,5 @@
 # Whitespace Remover - gedit plugin
-# Copyright (C) 2010 Christian Luginbühl
+# Copyright (C) 2010-2014 Christian Luginbühl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,24 +18,36 @@
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
 # Version of the program (to be updated when creating new packages)
-VERSION=0.3.0
+VERSION=0.4.0
 
 # Name of the program
 APPLICATION=gedit-whitespace-remover
 
 # Short name of the application
-SHORT_NAME=whitespace-remover
+SHORT_NAME=whitespace_remover
+
+# Local gedit plugin directoy
+GEDIT_LOCAL_PLUGIN_DIR=~/.local/share/gedit/plugins
+
+# GSchema directory
+GSCHEMA_DIR=/.local/share/glib-2.0/schemas
+
+# GSchema name
+GSCHEMA_NAME=org.gnome.gedit.plugins.whitespace-remover.gschema.xml
 
 # Original author
 AUTHOR="Christian Luginbühl"
 AUTHOR_EMAIL="dinkel@pimprecords.com"
+
+# Python executable
+PYTHON=python3
 
 # Name of the translations files (without extension)
 DOMAIN=messages
 
 # Dummy target, that intercepts the call to 'make' (without explicit target)
 dummy:
-	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, test, unittest, disttest, clean, mrproper, install, install-dev, uninstall\n"
+	echo "Possible targets are: dist, tgz, zip, update-locales, create-locale LOCALE={ll[_CC]}, test, schematest, unittest, disttest, clean, mrproper, install, install-dev, uninstall\n"
 
 # Tests and on success creates the packages
 safe-dist: test dist
@@ -46,8 +58,8 @@ dist: tgz zip
 # Packs everything needed to be deployed as a plugin into a gzipped tar
 tgz: _create-distdir compile-locales
 	tar czf dist/$(APPLICATION)-$(VERSION).tar.gz \
-	        README \
-	        $(SHORT_NAME).gedit-plugin \
+	        README.md \
+	        $(SHORT_NAME).plugin \
 	        $(SHORT_NAME)/ \
 	        --exclude *.po \
 	        --exclude *.pyc
@@ -59,8 +71,8 @@ tgz: _create-distdir compile-locales
 # Packs everything needed to be deployed as a plugin into a zip
 zip: _create-distdir compile-locales
 	zip -qr dist/$(APPLICATION)-$(VERSION).zip \
-	        README \
-	        $(SHORT_NAME).gedit-plugin \
+	        README.md \
+	        $(SHORT_NAME).plugin \
 	        $(SHORT_NAME)/ \
 	        -x *.po *.pyc
 	cd dist && \
@@ -76,7 +88,7 @@ create-locale: _generate-pot _create_localedir
 				    --input=$(DOMAIN).pot \
 				    --output="$(SHORT_NAME)/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po" ; \
 		    sed -i 's/PACKAGE/$(APPLICATION)/g' $(SHORT_NAME)/locale/$(LOCALE)/LC_MESSAGES/$(DOMAIN).po ; \
-			echo "Make sure to also update '$(SHORT_NAME).gedit-plugin'" ; \
+			echo "Make sure to also update '$(SHORT_NAME).plugin'" ; \
 		fi \
 	else \
 		echo "Usage is: make create-locale LOCALE={ll[_CC]}\n" ; \
@@ -97,15 +109,19 @@ compile-locales:
 	     -exec msgfmt {}/$(DOMAIN).po -o {}/$(DOMAIN).mo \;
 
 # Runs all tests
-test: unittest disttest
+test: schematest unittest disttest
+
+# Runs the gschema test
+schematest:
+	glib-compile-schemas --dry-run --strict $(SHORT_NAME)
 
 # Runs the unittests
 unittest:
-	python ./test/unit/alltests.py
+	$(PYTHON) ./test/unit/alltests.py
 
 # Runs the disttests
 disttest:
-	python ./test/dist/locale_in_pluginfile_test.py
+	$(PYTHON) ./test/dist/locale_in_pluginfile_test.py
 
 # Cleans up the directory sturcture
 clean:
@@ -117,19 +133,27 @@ mrproper: clean
 	find . -name "*.pyc" -exec rm {} \;
 	find $(SHORT_NAME)/locale -name "*.mo" -exec rm {} \;
 
-# Installs the plugin in ~/.gnome2/gedit/plugins
+# Installs the plugin locally
 install: safe-dist uninstall
-	tar zxfv dist/$(APPLICATION)-$(VERSION).tar.gz -C ~/.gnome2/gedit/plugins
-	rm ~/.gnome2/gedit/plugins/README
+	mkdir -p $(GEDIT_LOCAL_PLUGIN_DIR) $(GSCHEMA_DIR)
+	tar zxfv dist/$(APPLICATION)-$(VERSION).tar.gz -C $(GEDIT_LOCAL_PLUGIN_DIR)
+	rm $(GEDIT_LOCAL_PLUGIN_DIR)/README
+	mv $(GEDIT_LOCAL_PLUGIN_DIR)/$(SHORT_NAME)/$(GSCHEMA_NAME) $(GSCHEMA_DIR)
+	glib-compile-schemas $(GSCHEMA_DIR)
 
-# Symlinks the development version of the plugin in ~/.gnome2/gedit/plugins
+# Symlinks the development version of the plugin locally
 install-dev: uninstall
-	ln -s `pwd`/$(SHORT_NAME).gedit-plugin \
+	mkdir -p $(GEDIT_LOCAL_PLUGIN_DIR) $(GSCHEMA_DIR)
+	ln -s `pwd`/$(SHORT_NAME).plugin \
 	      `pwd`/$(SHORT_NAME)/ \
-	      ~/.gnome2/gedit/plugins/
+	      $(GEDIT_LOCAL_PLUGIN_DIR)
+	ln -s $(GEDIT_LOCAL_PLUGIN_DIR)/$(SHORT_NAME)/$(GSCHEMA_NAME) $(GSCHEMA_DIR)
+	glib-compile-schemas $(GSCHEMA_DIR)
 
 uninstall:
-	rm -rf ~/.gnome2/gedit/plugins/$(SHORT_NAME)*
+	rm -rf $(GEDIT_LOCAL_PLUGIN_DIR)/$(SHORT_NAME)*
+	rm -f $(GSCHEMA_DIR)/$(GSCHEMA_NAME)
+	glib-compile-schemas $(GSCHEMA_DIR)
 
 # Creates a dist/ directory where packages are saved (private)
 _create-distdir:

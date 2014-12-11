@@ -2,7 +2,7 @@
 *.pyc
 
 # ignore the dist directory with containing packages
-dist/
+/dist
 
 # ignore the translation template .pot-file
 *.pot

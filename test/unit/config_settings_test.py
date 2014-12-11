@@ -23,48 +23,35 @@ import unittest
 import sys
 import os
 
-import gconf
-
 sys.path.append(os.path.join(os.path.dirname(__file__),
                              '..',
                              '..',
-                             'whitespace-remover'))
+                             'whitespace_remover'))
 
 from config_settings import ConfigSettings
 
 class ConfigSettingsTest(unittest.TestCase):
 
-    _gconf_base = '/apps/gedit-2/plugins/whitespace-remover/'
-
     def setUp(self):
         self._config = ConfigSettings()
 
     def test_return_type(self):
-        self.assertTrue(isinstance(self._config.get_bool('remove_whitespace'),
+        self.assertTrue(isinstance(self._config.get_bool('remove-whitespace'),
                                    bool))
 
     def test_write_read_with_true(self):
-        self._config.set_bool('remove_whitespace', True)
-        self.assertTrue(self._config.get_bool('remove_whitespace'))
+        self._config.set_bool('remove-whitespace', True)
+        self.assertTrue(self._config.get_bool('remove-whitespace'))
 
     def test_write_read_with_false(self):
-        self._config.set_bool('remove_whitespace', False)
-        self.assertFalse(self._config.get_bool('remove_whitespace'))
+        self._config.set_bool('remove-whitespace', False)
+        self.assertFalse(self._config.get_bool('remove-whitespace'))
 
     def test_reading_unknown_key_fails(self):
         self.assertRaises(Exception, self._config.get_bool, 'unknown')
 
     def test_writing_unknown_key_fails(self):
         self.assertRaises(Exception, self._config.set_bool, 'unknown', True)
-
-    def test_intializing_writes_defaults(self):
-        key = self.__class__._gconf_base + 'remove_whitespace'
-        gconf.client_get_default().unset(key)
-        self.assertRaises(Exception,
-                          self._config.get_bool, 'remove_whitespace')
-        config = ConfigSettings()
-        self.assertTrue(config.get_bool('remove_whitespace'))
-
 
 if __name__ == '__main__':
     unittest.main()

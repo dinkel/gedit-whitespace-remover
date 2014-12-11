@@ -22,12 +22,11 @@
 import unittest
 import sys
 import os
-import gtk
 
 sys.path.append(os.path.join(os.path.dirname(__file__),
                              '..',
                              '..',
-                             'whitespace-remover'))
+                             'whitespace_remover'))
 
 from localization import Localization
 

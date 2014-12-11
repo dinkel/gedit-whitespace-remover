@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Whitespace Remover - gedit plugin
+Copyright (C) 2010-2014 Christian Luginbühl
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+This software is heavily inspried and in parts based on Osmo Salomaa's
+trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
+
+-->
+<schemalist>
+  <schema id="org.gnome.gedit.plugins.whitespace-remover"
+          path="/org/gnome/gedit/plugins/whitespace-remover/">
+    <key type="b" name="remove-whitespace">
+      <default>true</default>
+      <summary>Remove whitespace</summary>
+      <description>Strip trailing whitespace on every line.</description>
+    </key>
+    <key type="b" name="remove-newlines">
+      <default>true</default>
+      <summary>Remove newlines</summary>
+      <description>Remove newlines at the end of document.</description>
+    </key>
+    <key type="b" name="preserve-cursor">
+      <default>true</default>
+      <summary>Preserve cursor position</summary>
+      <description>Always preserve the cursor position.</description>
+    </key>
+  </schema>
+</schemalist>
+
+

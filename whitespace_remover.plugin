@@ -1,12 +1,12 @@
-[Gedit Plugin]
-Loader=python
-Module=whitespace-remover
-IAge=2
+[Plugin]
+Loader=python3
+Module=whitespace_remover
+IAge=3
 Name=Whitespace Remover
 Name[de]=Leerzeichenentferner
 Description=Strips unnecessary whitespace upon saving
 Description[de]=Entfernt unnötige Leerzeichen während des Speicherns
 Icon=edit-clear
 Authors=Christian Luginbühl <dinkel@pimprecords.com>
-Copyright=Copyright © 2010 Christian Luginbühl
+Copyright=Copyright © 2014 Christian Luginbühl
 Website=http://github.com/dinkel/gedit-whitespace-remover

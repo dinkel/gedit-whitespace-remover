@@ -22,12 +22,13 @@
 import unittest
 import sys
 import os
-import gtk
+
+from gi.repository import Gtk
 
 sys.path.append(os.path.join(os.path.dirname(__file__),
                              '..',
                              '..',
-                             'whitespace-remover'))
+                             'whitespace_remover'))
 
 from document_manipulator import DocumentManipulator
 
@@ -149,7 +150,7 @@ class DocumentManipulatorTest(unittest.TestCase):
                          self._get_contents(actual))
 
     def _get_textbuffer(self, filename):
-        buffer = gtk.TextBuffer()
+        buffer = Gtk.TextBuffer()
 
         f = open(os.path.join(os.path.dirname(__file__), filename), 'r')
         buffer.set_text(f.read())
@@ -161,7 +162,7 @@ class DocumentManipulatorTest(unittest.TestCase):
         start = buffer.get_start_iter()
         end = buffer.get_end_iter()
 
-        return buffer.get_text(start, end)
+        return buffer.get_text(start, end, True)
 
 
 

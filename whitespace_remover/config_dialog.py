@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Whitespace Remover - gedit plugin
-# Copyright (C) 2010 Christian Luginbühl
+# Copyright (C) 2010-2014 Christian Luginbühl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,63 +19,66 @@
 # This software is heavily inspried and in parts based on Osmo Salomaa's
 # trailsave plugin <http://users.tkk.fi/~otsaloma/gedit/>.
 
-import gtk
+from gi.repository import Gtk
 
-from localization import Localization
+from .localization import Localization
 
-class ConfigDialog(gtk.Dialog):
+class ConfigDialog(Gtk.Dialog):
     """Configuration dialog."""
 
-    def __init__(self, plugin, config = None):
+    def __init__(self, config = None):
         """Constructor."""
         self._config = config
 
         Localization.setup()
 
-        gtk.Dialog.__init__(self,
+        Gtk.Dialog.__init__(self,
                             _("Settings"),
                             None,
-                            gtk.DIALOG_DESTROY_WITH_PARENT)
+                            Gtk.DialogFlags.DESTROY_WITH_PARENT)
 
         self.set_resizable(False)
 
-        close_button = self.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+        close_button = self.add_button(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE)
         close_button.grab_default()
-        close_button.connect_object("clicked", gtk.Widget.destroy, self)
+        close_button.connect_object("clicked", Gtk.Widget.destroy, self)
 
-        main_box = gtk.VBox(False, 0)
+        main_box = Gtk.VBox(False, 0)
         main_box.set_border_width(12)
 
-        title_label = gtk.Label()
+        title_label = Gtk.Label()
         title_label.set_markup(
             '<b>' + _("Actions to perform upon saving:") + '</b>')
         title_label.set_alignment(0, 0)
 
-        config_box = gtk.VBox(False, 6)
+        config_box = Gtk.VBox(False, 6)
         config_box.set_border_width(6)
 
         checkbox_label = _("_Strip trailing whitespace on every line")
-        whitespace_checkbox = gtk.CheckButton(checkbox_label)
+        whitespace_checkbox = Gtk.CheckButton(checkbox_label, 
+                                              use_underline = True)
         whitespace_checkbox.connect('clicked',
                                     self.update_setting,
-                                    'remove_whitespace')
+                                    'remove-whitespace')
         whitespace_checkbox.set_active(
-            self._config.get_bool('remove_whitespace'))
+            self._config.get_bool('remove-whitespace'))
 
         checkbox_label = _("_Remove newlines at the end of document")
-        newlines_checkbox = gtk.CheckButton(checkbox_label)
+        newlines_checkbox = Gtk.CheckButton(checkbox_label,
+                                            use_underline = True)
         newlines_checkbox.connect('clicked',
                                   self.update_setting,
-                                  'remove_newlines')
-        newlines_checkbox.set_active(self._config.get_bool('remove_newlines'))
+                                  'remove-newlines')
+        newlines_checkbox.set_active(self._config.get_bool('remove-newlines'))
 
         checkbox_label = _("_Always preserve the cursor position")
-        preserve_cursor_checkbox = gtk.CheckButton(checkbox_label)
+        preserve_cursor_checkbox = Gtk.CheckButton(checkbox_label,
+                                                   use_underline = True)
         preserve_cursor_checkbox.connect('clicked',
                                          self.update_setting,
-                                         'preserve_cursor')
+                                         'preserve-cursor')
         preserve_cursor_checkbox.set_active(
-            self._config.get_bool('preserve_cursor'))
+            self._config.get_bool('preserve-cursor'))
 
         config_box.pack_start(whitespace_checkbox, True, True, 0)
         config_box.pack_start(newlines_checkbox, True, True, 0)
