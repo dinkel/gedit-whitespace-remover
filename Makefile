@@ -131,6 +131,7 @@ clean:
 # Cleans more thoroughly (including .mo-files and .pyc that are not needed for git updates)
 mrproper: clean
 	find . -name "*.pyc" -exec rm {} \;
+	rmdir `find . -name "__pycache__"`
 	find $(SHORT_NAME)/locale -name "*.mo" -exec rm {} \;
 
 # Installs the plugin locally

@@ -1,5 +1,6 @@
-# ignore all compiled python files (*.pyc)
+# ignore all compiled python files
 *.pyc
+__pycache__/
 
 # ignore the dist directory with containing packages
 /dist
