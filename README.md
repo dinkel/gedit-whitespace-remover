@@ -38,7 +38,7 @@ Copy or move the file `org.gnome.gedit.plugin.whitespace-remover.gschema.xml` in
 
 Additionally you need to make sure that `~/.local/share` is in the environment variable `XDG_DATA_DIRS` (this is due to an im my opinion wrong behaviour of GSettings and described in [https://bugzilla.gnome.org/show_bug.cgi?id=741335]).
 
-The to me nicest way to do is to add the following lines to `~/.bashrc` (or similar):
+The to me nicest way to do is to add the following lines to `~/.profile` (or similar):
 
     export XDG_DATA_HOME=$HOME/.local/share
     export XDG_DATA_DIRS=$XDG_DATA_HOME:$XDG_DATA_DIRS
