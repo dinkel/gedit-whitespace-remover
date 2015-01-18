@@ -30,7 +30,7 @@ SHORT_NAME=whitespace_remover
 GEDIT_LOCAL_PLUGIN_DIR=~/.local/share/gedit/plugins
 
 # GSchema directory
-GSCHEMA_DIR=/.local/share/glib-2.0/schemas
+GSCHEMA_DIR=~/.local/share/glib-2.0/schemas
 
 # GSchema name
 GSCHEMA_NAME=org.gnome.gedit.plugins.whitespace-remover.gschema.xml
